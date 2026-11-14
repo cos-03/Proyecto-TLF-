@@ -1,0 +1,14 @@
+# Control de riego para el lote 3
+programa finca_la_esperanza {
+    var humedad = 42;
+    var meta = 60.5;
+    si (humedad < meta) {
+        regar((meta - humedad) * 2);
+    } sino {
+        alerta("humedad óptima, no se riega");
+    }
+    mientras (humedad < 50) {
+        humedad = humedad + 1;
+        mostrar(humedad);
+    }
+}

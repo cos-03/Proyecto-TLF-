@@ -1,0 +1,7 @@
+programa finca_error {
+    var humedad = 42 @ 2;
+    var sensor = 12.;
+    si (humedad ! 30) {
+        alerta("sensor sin respuesta);
+    }
+}

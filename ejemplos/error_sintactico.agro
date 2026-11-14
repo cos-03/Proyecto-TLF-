@@ -1,0 +1,10 @@
+programa finca_sintactico {
+    var humedad = 42
+    var meta = 60.5 +;
+    si humedad < meta) {
+        regar((meta - humedad) * 2);
+    }
+    mientras (humedad) {
+        humedad = humedad + 1;
+        mostrar(humedad);
+    }
