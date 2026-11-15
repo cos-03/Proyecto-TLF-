@@ -38,12 +38,11 @@ class ParserTests(unittest.TestCase):
         self.assertIsNone(tree)
         self.assertEqual(len(errors), 1)
 
-    @patch("agroscript.cli.webbrowser.open", return_value=True)
-    def test_opens_html_when_no_source_is_given(self, mock_open):
+    @patch("agroscript.cli.run_server")
+    def test_starts_web_demo_when_no_source_is_given(self, mock_server):
         result = main([])
         self.assertEqual(result, 0)
-        mock_open.assert_called_once()
-        self.assertIn("index.html", mock_open.call_args[0][0])
+        mock_server.assert_called_once()
 
 
 if __name__ == "__main__":

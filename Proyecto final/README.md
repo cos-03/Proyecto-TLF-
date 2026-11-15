@@ -20,22 +20,28 @@ Desde esta carpeta:
 
 ```text
 python main.py
+python main.py --web
 python main.py ejemplos/riego_valido.agro
 python main.py ejemplos/riego_valido.agro --tokens
 python -m unittest discover -s tests -v
 ```
 
-Sin argumentos, `python main.py` abre `index.html` en el navegador por defecto.
-Con una ruta de archivo se analiza el programa `.agro` normalmente.
+Sin argumentos, `python main.py` inicia el servidor local de la demostración y
+abre la página en el navegador. También puedes iniciar la demo con
+`python main.py --web`; cierra el servidor con `Ctrl+C`. Con una ruta de
+archivo se conserva el análisis por consola.
 
-Para recorrer la presentación visual, abre `index.html` en un navegador. La
-página permite explorar las transiciones de cada estado del AFD y distingue
-estados de aceptación, rechazo y el sumidero. También incluye un configurador
-que recibe valores NUM y construye el programa sin que el usuario escriba
-código. Si un dato no cumple el formato de la gramática, muestra el motivo. El
-árbol de derivación se actualiza con esos valores y permite avanzar por las
-expansiones, reproducirlas y consultar la forma sentencial. Para analizar otro
-archivo o regenerar el árbol, usa Python mediante los comandos anteriores.
+En la página puedes recorrer las transiciones de cada estado del AFD, cargar
+ejemplos o escribir un programa propio y analizarlo con el lexer y parser de
+Python. La demo muestra tokens y recorridos de estados, errores por fase y el
+árbol sintáctico generado visualmente con los lexemas ingresados (con una vista
+textual alternativa). El configurador numérico y el recorrido paso a paso del
+árbol también están disponibles. El programa describe el riego: no ejecuta
+acciones en dispositivos físicos.
+
+## Explicación visual
+
+Consulta la explicación visual del proyecto en [esta carpeta de Google Drive](https://drive.google.com/drive/folders/13bDJr9cQpSnvhSOU886DY5Oqy3_CNx_F?usp=drive_link).
 
 El código de salida es `0` si el programa es válido, `1` si hay errores
 léxicos o sintácticos y `2` si no se pudo leer el archivo.
@@ -121,3 +127,26 @@ por llaves evitan el problema del `sino` colgante.
 La justificación de ambigüedad, eliminación de recursividad izquierda,
 factorización, conjuntos FIRST/FOLLOW y la especificación del AFD se desarrolla
 en [docs/ESPECIFICACION_FORMAL.md](./docs/ESPECIFICACION_FORMAL.md).
+
+## Rangos del configurador
+
+El configurador limita el umbral didáctico de temperatura a **18–21 °C**, el
+rango óptimo de referencia reportado para *Coffea arabica*. La temperatura
+actual puede quedar fuera de ese rango: se muestra una advertencia, pero se
+acepta como lectura. El rango no sustituye recomendaciones locales ni debe
+usarse como umbral de control físico sin calibración del sistema.
+
+La humedad del configurador se refiere a **humedad del suelo en una escala
+porcentual calibrada**, por eso sus valores deben estar entre 0 y 100 %. Ese
+límite es técnico, no un rango agronómico recomendado: no existe un porcentaje
+universal de humedad del suelo para todos los cafetales y sensores. Cenicafé
+describe el balance hídrico del café mediante humedad del suelo,
+evapotranspiración y precipitación; la calibración de sensores también depende
+de las propiedades locales del suelo. Por tanto, la meta debe definirse para el
+suelo y sensor usados.
+
+Fuentes:
+
+- [NOAA Climate.gov, “Climate & Coffee”](https://www.climate.gov/news-features/climate-and/climate-coffee): referencia térmica para café arábigo.
+- [Cenicafé, “Aplicativo de balance hídrico para el cultivo de café en Colombia” (2022)](https://publicaciones.cenicafe.org/index.php/avances_tecnicos/article/view/188): balance entre humedad del suelo, evapotranspiración y precipitación.
+- [University of Arizona Cooperative Extension, guía de calibración de sensores de humedad](https://extension.arizona.edu/publication/guide-maintaining-and-calibrating-field-installed-soil-and-plant-moisture-sensors): las lecturas varían con el suelo y requieren calibración.

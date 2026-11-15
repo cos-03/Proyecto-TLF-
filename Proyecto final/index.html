@@ -26,6 +26,18 @@
 
     html { scroll-behavior: smooth; }
 
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
     body {
       margin: 0;
       background: var(--paper);
@@ -566,6 +578,111 @@
       font-size: 14px;
     }
 
+    .playground { margin-top: 24px; }
+    .playground > h3 { margin: 0 0 6px; }
+    .playground-intro { margin: 0 0 16px !important; color: var(--muted); }
+    .playground-toolbar {
+      display: flex;
+      align-items: end;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .playground-example { display: grid; gap: 5px; flex: 1 1 220px; }
+    .playground-example label { font-size: 13px; font-weight: 750; }
+    .playground-example select {
+      width: 100%;
+      min-height: 44px;
+      padding: 8px 11px;
+      border: 1px solid #cbd5c0;
+      border-radius: 10px;
+      background: white;
+      color: var(--ink);
+      font: inherit;
+    }
+    .playground-toolbar button { cursor: pointer; font: inherit; }
+    #source-editor {
+      display: block;
+      width: 100%;
+      min-height: 260px;
+      padding: 15px;
+      border: 1px solid #cbd5c0;
+      border-radius: 12px;
+      background: var(--code);
+      color: #e9f2e7;
+      font: 13px/1.65 Consolas, "Courier New", monospace;
+      resize: vertical;
+      tab-size: 4;
+    }
+    #source-editor:focus { outline: 3px solid rgba(36, 92, 69, .18); border-color: var(--green); }
+    .demo-status {
+      margin: 12px 0 0 !important;
+      padding: 11px 13px;
+      border-radius: 10px;
+      background: #edf3e6;
+      color: var(--green-dark) !important;
+      font-size: 13px;
+    }
+    .demo-status.error { background: #fff0ed; color: #8d291f !important; }
+    .playground-results {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 16px;
+    }
+    .analysis-phase {
+      min-width: 0;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #f8faf6;
+    }
+    .analysis-phase:first-child { grid-column: 1 / -1; }
+    .analysis-phase h4 { margin: 0 0 9px; font-size: 15px; }
+    .analysis-phase-summary { margin: 0 0 10px; color: var(--muted); font-size: 12px; }
+    .analysis-phase .table-wrap { max-height: 360px; overflow: auto; }
+    .analysis-phase table { min-width: 610px; }
+    .analysis-phase code { overflow-wrap: anywhere; }
+    .analysis-errors { margin: 0; padding-left: 21px; color: #8d291f; font-size: 13px; }
+    .analysis-errors li + li { margin-top: 7px; }
+    .analysis-tree-viewport {
+      max-height: 520px;
+      min-height: 150px;
+      overflow: auto;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+    .analysis-tree-svg { display: block; max-width: none; }
+    .analysis-tree-svg[hidden] { display: none; }
+    .analysis-tree-svg .tree-edge {
+      fill: none;
+      stroke: #91a486;
+      stroke-width: 1.5;
+    }
+    .analysis-tree-svg .tree-node rect {
+      fill: #edf3e6;
+      stroke: #73926a;
+      stroke-width: 1.5;
+    }
+    .analysis-tree-svg .tree-node text {
+      fill: var(--ink);
+      font: 12px ui-monospace, SFMono-Regular, Consolas, monospace;
+    }
+    .analysis-tree-svg .tree-node.terminal rect { fill: #fff7dd; stroke: #c89c36; }
+    .analysis-tree-placeholder { margin: 0; padding: 24px; color: var(--muted); font-size: 13px; }
+    .analysis-tree-text { margin-top: 10px; }
+    .analysis-tree-text summary { cursor: pointer; color: var(--muted); font-size: 12px; }
+    .analysis-tree-text pre {
+      max-height: 300px;
+      margin-top: 8px;
+      border-radius: 10px;
+      background: var(--code);
+      color: #e9f2e7;
+      font-size: 12px;
+      overflow: auto;
+    }
+
     .builder-grid {
       display: grid;
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
@@ -595,6 +712,8 @@
 
     .value-field input:focus { outline: 3px solid rgba(36, 92, 69, .16); border-color: var(--green); }
     .value-field input[aria-invalid="true"] { border-color: #b42318; }
+    .field-hint { margin: 0; color: #536151; font-size: 11px; line-height: 1.45; }
+    .field-hint.warning { color: #8a4b08; }
     .field-error { min-height: 18px; color: #a33025; font-size: 11px; line-height: 1.4; }
     .builder-actions { margin-top: 14px; }
     .builder-actions .button { cursor: pointer; font: inherit; }
@@ -618,6 +737,21 @@
       gap: 18px;
       align-items: start;
     }
+
+    .tree-input-prompt {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: -4px 0 18px;
+      padding: 14px 18px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #f8faf6;
+    }
+    .tree-input-prompt p { margin: 0; color: var(--muted); }
+    .tree-input-prompt strong { color: var(--ink); }
 
     .tree-card { min-width: 0; }
 
@@ -768,6 +902,8 @@
       .stat:nth-child(n + 3) { border-top: 1px solid var(--line); }
       .stat:nth-child(3) { border-left: 0; }
       .overview, .afd-layout, .grammar-grid, .builder-grid, .tree-layout, .run-card { grid-template-columns: 1fr; }
+      .playground-results { grid-template-columns: minmax(0, 1fr); }
+      .analysis-phase:first-child { grid-column: auto; }
       .value-fields { grid-template-columns: 1fr; }
       .pipeline { grid-template-columns: repeat(2, 1fr); margin-bottom: 48px; }
       .section-heading { align-items: start; flex-direction: column; }
@@ -816,6 +952,12 @@
       <div class="hero-actions">
         <a class="button" href="#lenguaje">Explorar el proyecto</a>
         <a class="button secondary" href="#ejecucion">Cómo ejecutarlo</a>
+        <a
+          class="button secondary"
+          href="https://drive.google.com/drive/folders/13bDJr9cQpSnvhSOU886DY5Oqy3_CNx_F?usp=drive_link"
+          target="_blank"
+          rel="noopener noreferrer"
+        >Explicación visual del proyecto ↗</a>
       </div>
       <aside class="hero-note">
         <strong>Σ → AFD → G2</strong>
@@ -1013,7 +1155,7 @@
           <div class="kicker">05 · Casos de prueba</div>
           <h2>Válido o con errores</h2>
         </div>
-        <p>Los ejemplos muestran la salida del analizador; este visor web es informativo y no ejecuta el parser de Python.</p>
+        <p>Carga un ejemplo o escribe tu propio programa y prueba las fases con el lexer y el parser reales de Python.</p>
       </div>
       <div class="example-tabs" role="tablist" aria-label="Ejemplos AgroScript">
         <button class="tab-button" id="tab-valid" role="tab" aria-selected="true" aria-controls="panel-valid">Programa válido</button>
@@ -1039,6 +1181,67 @@ si (humedad ! 30) { ... }</code></pre></div>
 }</code></pre></div>
         <div class="example-result">El parser reporta el punto y coma faltante y el paréntesis requerido, con línea y columna. La recuperación permite continuar con sentencias posteriores.</div>
       </div>
+      <article class="card playground">
+        <h3>Escribe y analiza un programa AgroScript</h3>
+        <p class="playground-intro">El análisis se ejecuta en el lexer y parser de Python de este proyecto. No se ejecutan acciones de riego ni código arbitrario.</p>
+        <div class="playground-toolbar">
+          <div class="playground-example">
+            <label for="source-example">Ejemplo para cargar</label>
+            <select id="source-example">
+              <option value="ejemplos/riego_valido.agro">Programa válido</option>
+              <option value="ejemplos/error_lexico.agro">Errores léxicos</option>
+              <option value="ejemplos/error_sintactico.agro">Errores sintácticos</option>
+            </select>
+          </div>
+          <button class="button secondary" id="load-source-example" type="button">Cargar ejemplo</button>
+          <button class="button" id="analyze-source" type="button">Analizar programa</button>
+        </div>
+        <label class="sr-only" for="source-editor">Código fuente AgroScript</label>
+        <textarea id="source-editor" spellcheck="false" autocapitalize="off" autocomplete="off">programa demo {
+    var humedad = 42;
+    var meta = 60.5;
+    si (humedad &lt; meta) {
+        regar((meta - humedad) * 2);
+    } sino {
+        alerta("humedad óptima");
+    }
+}</textarea>
+        <p class="demo-status" id="demo-status" role="status" aria-live="polite">Escribe o carga un programa y selecciona “Analizar programa”.</p>
+        <div class="playground-results">
+          <article class="analysis-phase">
+            <h4>Fase 1 · Análisis léxico</h4>
+            <p class="analysis-phase-summary" id="token-summary">Los tokens reconocidos y sus recorridos por el AFD aparecerán aquí.</p>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Línea:columna</th><th>Token</th><th>Lexema</th><th>Recorrido AFD</th></tr></thead>
+                <tbody id="token-output">
+                  <tr><td colspan="4">Aún no se ha analizado un programa.</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <ul class="analysis-errors" id="lexical-errors"></ul>
+          </article>
+          <article class="analysis-phase">
+            <h4>Fase 2 · Análisis sintáctico</h4>
+            <p class="analysis-phase-summary" id="parser-summary">El resultado de la GIC se mostrará aquí.</p>
+            <ul class="analysis-errors" id="syntax-errors"></ul>
+          </article>
+          <article class="analysis-phase">
+            <h4>Fase 3 · Árbol de derivación</h4>
+            <p class="analysis-phase-summary" id="analysis-tree-caption">El árbol generado desde tu código aparecerá aquí.</p>
+            <div class="analysis-tree-viewport">
+              <p class="analysis-tree-placeholder" id="analysis-tree-placeholder">
+                Escribe o carga un programa y selecciona “Analizar programa”.
+              </p>
+              <svg class="analysis-tree-svg" id="analysis-tree-svg" role="img" aria-label="Árbol de derivación generado" hidden></svg>
+            </div>
+            <details class="analysis-tree-text">
+              <summary>Ver el árbol en formato textual</summary>
+              <pre id="analysis-tree">El árbol aparecerá después del análisis.</pre>
+            </details>
+          </article>
+        </div>
+      </article>
     </section>
 
     <section class="wrap builder-section" id="configurar">
@@ -1047,25 +1250,29 @@ si (humedad ! 30) { ... }</code></pre></div>
           <div class="kicker">06 · Configurador</div>
           <h2>Ingresa valores, no código</h2>
         </div>
-        <p>Completa los datos de riego. AgroScript construye el programa y señala qué regla debe cumplir cada valor.</p>
+        <p>Completa los datos de riego. Al generar, los valores actualizan el programa y el árbol paso a paso de la sección 07.</p>
       </div>
       <div class="builder-grid">
         <form class="card" id="program-form" novalidate>
           <p class="builder-hint">Cada campo recibe un solo NUM: dígitos, con punto decimal opcional. No escribas operadores ni instrucciones.</p>
           <div class="value-fields">
             <div class="value-field">
-              <label for="value-humidity">Humedad actual (NUM)</label>
-              <input id="value-humidity" inputmode="decimal" autocomplete="off" value="42" aria-describedby="error-humidity">
+              <label for="value-humidity">Humedad actual del suelo (%)</label>
+              <input id="value-humidity" inputmode="decimal" autocomplete="off" value="42" aria-describedby="humidity-range-hint error-humidity">
+              <small class="field-hint" id="humidity-range-hint">Usa la escala porcentual calibrada de tu sensor (0–100 %); no es un rango óptimo universal para el café. <a href="https://publicaciones.cenicafe.org/index.php/avances_tecnicos/article/view/188" target="_blank" rel="noopener noreferrer">Cenicafé</a></small>
               <small class="field-error" id="error-humidity"></small>
             </div>
             <div class="value-field">
-              <label for="value-target">Meta de humedad (NUM)</label>
-              <input id="value-target" inputmode="decimal" autocomplete="off" value="60.5" aria-describedby="error-target">
+              <label for="value-target">Meta de humedad del suelo (%)</label>
+              <input id="value-target" inputmode="decimal" autocomplete="off" value="60.5" aria-describedby="target-range-hint error-target">
+              <small class="field-hint" id="target-range-hint">El punto de riego depende del suelo, el cultivo y la calibración del sensor; configura aquí el valor de tu caso. <a href="https://extension.arizona.edu/publication/guide-maintaining-and-calibrating-field-installed-soil-and-plant-moisture-sensors" target="_blank" rel="noopener noreferrer">Guía de calibración</a></small>
               <small class="field-error" id="error-target"></small>
             </div>
             <div class="value-field">
-              <label for="value-temperature">Temperatura actual (NUM)</label>
-              <input id="value-temperature" inputmode="decimal" autocomplete="off" value="31" aria-describedby="error-temperature">
+              <label for="value-temperature">Temperatura actual (°C)</label>
+              <input id="value-temperature" inputmode="decimal" autocomplete="off" value="31" aria-describedby="temperature-hint temperature-source error-temperature">
+              <small class="field-hint" id="temperature-hint" aria-live="polite">El rango óptimo de referencia para café arábigo es 18–21 °C. Una lectura actual fuera de ese rango se admite y se señala, no se bloquea.</small>
+              <small class="field-hint" id="temperature-source">Fuente: <a href="https://www.climate.gov/news-features/climate-and/climate-coffee" target="_blank" rel="noopener noreferrer">NOAA Climate.gov</a></small>
               <small class="field-error" id="error-temperature"></small>
             </div>
             <div class="value-field">
@@ -1074,8 +1281,9 @@ si (humedad ! 30) { ... }</code></pre></div>
               <small class="field-error" id="error-water-factor"></small>
             </div>
             <div class="value-field">
-              <label for="value-temperature-limit">Temperatura límite (NUM)</label>
-              <input id="value-temperature-limit" inputmode="decimal" autocomplete="off" value="30" aria-describedby="error-temperature-limit">
+              <label for="value-temperature-limit">Umbral didáctico de temperatura (°C)</label>
+              <input id="value-temperature-limit" inputmode="decimal" autocomplete="off" value="21" aria-describedby="temperature-limit-hint error-temperature-limit">
+              <small class="field-hint" id="temperature-limit-hint">Configura entre 18 y 21 °C, rango óptimo de referencia para Coffea arabica; un control real requiere ajuste local. <a href="https://www.climate.gov/news-features/climate-and/climate-coffee" target="_blank" rel="noopener noreferrer">Fuente NOAA</a></small>
               <small class="field-error" id="error-temperature-limit"></small>
             </div>
           </div>
@@ -1101,7 +1309,11 @@ si (humedad ! 30) { ... }</code></pre></div>
           <div class="kicker">07 · Resultado sintáctico</div>
           <h2>Recorre el árbol paso a paso</h2>
         </div>
-        <p>Visualización interactiva de la derivación del programa actual. Comienza con el ejemplo y se actualiza al generar nuevos valores.</p>
+        <p>Visualización interactiva de la derivación del programa actual. Ingresa valores en 06 · Configurador para actualizar sus hojas.</p>
+      </div>
+      <div class="tree-input-prompt">
+        <p><strong>¿Quieres generar otro árbol?</strong> Ingresa los valores en 06 · Configurador y pulsa “Generar programa”.</p>
+        <a class="button" href="#configurar">Ingresar valores</a>
       </div>
       <div class="tree-layout">
         <article class="card tree-card" aria-labelledby="tree-title">
@@ -1303,7 +1515,7 @@ si (humedad ! 30) { ... }</code></pre></div>
 │                   │       │   └── &lt;expr&gt;
 │                   │       │       ├── &lt;termino&gt;
 │                   │       │       │   ├── &lt;factor&gt;
-│                   │       │       │   │   └── NUM '30'
+│                   │       │       │   │   └── NUM '21'
 │                   │       │       │   └── &lt;termino'&gt;
 │                   │       │       │       └── ε
 │                   │       │       └── &lt;expr'&gt;
@@ -1419,6 +1631,259 @@ si (humedad ! 30) { ... }</code></pre></div>
         });
       });
     });
+
+    const sourceEditor = document.querySelector("#source-editor");
+    const sourceExample = document.querySelector("#source-example");
+    const loadSourceButton = document.querySelector("#load-source-example");
+    const analyzeSourceButton = document.querySelector("#analyze-source");
+    const demoStatus = document.querySelector("#demo-status");
+    const tokenOutput = document.querySelector("#token-output");
+    const tokenSummary = document.querySelector("#token-summary");
+    const lexicalErrors = document.querySelector("#lexical-errors");
+    const parserSummary = document.querySelector("#parser-summary");
+    const syntaxErrors = document.querySelector("#syntax-errors");
+    const analysisTree = document.querySelector("#analysis-tree");
+    const analysisTreeSvg = document.querySelector("#analysis-tree-svg");
+    const analysisTreeCaption = document.querySelector("#analysis-tree-caption");
+    const analysisTreePlaceholder = document.querySelector("#analysis-tree-placeholder");
+    const analysisSvgNamespace = "http://www.w3.org/2000/svg";
+
+    function setDemoStatus(message, isError = false) {
+      demoStatus.textContent = message;
+      demoStatus.classList.toggle("error", isError);
+    }
+
+    function renderParsedTree(root, treeText, valid) {
+      analysisTreeSvg.replaceChildren();
+      analysisTreeSvg.hidden = true;
+      analysisTreePlaceholder.hidden = false;
+      analysisTree.textContent = treeText
+        ? `${valid ? "" : "ÁRBOL PARCIAL · revisa los errores anteriores\n"}${treeText}`
+        : "No se pudo construir un árbol de derivación.";
+
+      if (!root) {
+        analysisTreeCaption.textContent = "No se pudo construir un árbol de derivación.";
+        analysisTreePlaceholder.textContent = "Corrige los errores sintácticos para generar el árbol.";
+        return;
+      }
+
+      const nodes = [];
+      const pending = [root];
+      while (pending.length > 0) {
+        const node = pending.pop();
+        nodes.push(node);
+        if (nodes.length > 1500) {
+          analysisTreeCaption.textContent = "Árbol demasiado grande para dibujarse; consulta el formato textual.";
+          analysisTreePlaceholder.textContent = "Este árbol tiene más de 1500 nodos. Abre “Ver el árbol en formato textual”.";
+          return;
+        }
+        pending.push(...node.children);
+      }
+
+      const horizontalGap = 16;
+      const verticalGap = 72;
+      const nodeHeight = 40;
+      const padding = 24;
+      function measure(node) {
+        const nodeWidth = Math.max(92, Math.min(260, node.label.length * 7 + 24));
+        const children = node.children.map(measure);
+        const childrenWidth = children.reduce((sum, child) => sum + child.width, 0) +
+          horizontalGap * Math.max(0, children.length - 1);
+        return {
+          width: Math.max(nodeWidth, childrenWidth),
+          nodeWidth,
+          depth: children.length === 0 ? 0 : 1 + Math.max(...children.map((child) => child.depth)),
+          children
+        };
+      }
+
+      const layout = measure(root);
+      const width = Math.ceil(layout.width + padding * 2);
+      const height = Math.ceil((layout.depth + 1) * verticalGap + padding * 2);
+      analysisTreeSvg.setAttribute("viewBox", `0 0 ${width} ${height}`);
+      analysisTreeSvg.setAttribute("width", String(width));
+      analysisTreeSvg.setAttribute("height", String(height));
+      analysisTreeSvg.setAttribute(
+        "aria-label",
+        `Árbol de derivación generado con ${nodes.length} nodos${valid ? "" : ", parcial por errores"}`
+      );
+
+      const title = document.createElementNS(analysisSvgNamespace, "title");
+      title.textContent = "Árbol de derivación del programa ingresado";
+      const edges = document.createElementNS(analysisSvgNamespace, "g");
+      edges.setAttribute("class", "tree-edges");
+      const renderedNodes = document.createElementNS(analysisSvgNamespace, "g");
+      renderedNodes.setAttribute("class", "tree-nodes");
+      analysisTreeSvg.append(title, edges, renderedNodes);
+
+      function place(node, size, left, level) {
+        const center = left + size.width / 2;
+        const x = center - size.nodeWidth / 2;
+        const y = padding + level * verticalGap;
+        const childrenWidth = size.children.reduce((sum, child) => sum + child.width, 0) +
+          horizontalGap * Math.max(0, size.children.length - 1);
+        let childLeft = left + (size.width - childrenWidth) / 2;
+
+        if (size.children.length > 0) {
+          const branchY = y + nodeHeight + (verticalGap - nodeHeight) / 2;
+          size.children.forEach((childSize) => {
+            const childCenter = childLeft + childSize.width / 2;
+            const childY = padding + (level + 1) * verticalGap;
+            const edge = document.createElementNS(analysisSvgNamespace, "path");
+            edge.setAttribute(
+              "d",
+              `M ${center} ${y + nodeHeight} V ${branchY} H ${childCenter} V ${childY}`
+            );
+            edge.setAttribute("class", "tree-edge");
+            edges.append(edge);
+            childLeft += childSize.width + horizontalGap;
+          });
+          childLeft = left + (size.width - childrenWidth) / 2;
+        }
+
+        const group = document.createElementNS(analysisSvgNamespace, "g");
+        const terminal = node.children.length === 0;
+        group.setAttribute("class", `tree-node${terminal ? " terminal" : ""}`);
+        const box = document.createElementNS(analysisSvgNamespace, "rect");
+        box.setAttribute("x", String(x));
+        box.setAttribute("y", String(y));
+        box.setAttribute("width", String(size.nodeWidth));
+        box.setAttribute("height", String(nodeHeight));
+        box.setAttribute("rx", "8");
+        const label = document.createElementNS(analysisSvgNamespace, "text");
+        label.setAttribute("x", String(center));
+        label.setAttribute("y", String(y + nodeHeight / 2));
+        label.setAttribute("text-anchor", "middle");
+        label.setAttribute("dominant-baseline", "middle");
+        label.textContent = node.label.length > 32 ? `${node.label.slice(0, 29)}...` : node.label;
+        const fullLabel = document.createElementNS(analysisSvgNamespace, "title");
+        fullLabel.textContent = node.label;
+        group.append(box, label, fullLabel);
+        renderedNodes.append(group);
+
+        node.children.forEach((child, index) => {
+          place(child, size.children[index], childLeft, level + 1);
+          childLeft += size.children[index].width + horizontalGap;
+        });
+      }
+
+      place(root, layout, padding, 0);
+      analysisTreeSvg.hidden = false;
+      analysisTreePlaceholder.hidden = true;
+      analysisTreeCaption.textContent =
+        `${valid ? "Árbol generado" : "Árbol parcial"} con ${nodes.length} nodos; los nodos terminales contienen los lexemas ingresados.`;
+    }
+
+    function renderDemoErrors(container, errors) {
+      container.replaceChildren();
+      errors.forEach((error) => {
+        const item = document.createElement("li");
+        const position = document.createElement("strong");
+        position.textContent = `Línea ${error.line}, columna ${error.column}: `;
+        item.append(position, document.createTextNode(error.message));
+        if (error.state) {
+          item.append(document.createTextNode(` (${error.state})`));
+        }
+        container.append(item);
+      });
+    }
+
+    function renderDemoTokens(tokens) {
+      tokenOutput.replaceChildren();
+      if (tokens.length === 0) {
+        const row = document.createElement("tr");
+        const cell = document.createElement("td");
+        cell.colSpan = 4;
+        cell.textContent = "No se reconocieron tokens.";
+        row.append(cell);
+        tokenOutput.append(row);
+        return;
+      }
+
+      tokens.forEach((token) => {
+        const row = document.createElement("tr");
+        const values = [
+          `${token.line}:${token.column}`,
+          token.kind,
+          token.lexeme,
+          token.states.join(" → ")
+        ];
+        values.forEach((value, index) => {
+          const cell = document.createElement("td");
+          if (index > 0) {
+            const code = document.createElement("code");
+            code.textContent = value;
+            cell.append(code);
+          } else {
+            cell.textContent = value;
+          }
+          row.append(cell);
+        });
+        tokenOutput.append(row);
+      });
+    }
+
+    async function loadSourceExample() {
+      try {
+        const response = await fetch(sourceExample.value);
+        if (!response.ok) {
+          throw new Error(`No se pudo cargar el ejemplo (${response.status}).`);
+        }
+        sourceEditor.value = await response.text();
+        setDemoStatus("Ejemplo cargado. Selecciona “Analizar programa” para recorrer las fases.");
+      } catch (error) {
+        setDemoStatus(
+          `No se pudo cargar el ejemplo: ${error.message} Ejecuta python main.py para iniciar la demo local.`,
+          true
+        );
+      }
+    }
+
+    async function analyzeSource() {
+      analyzeSourceButton.disabled = true;
+      setDemoStatus("Analizando el programa con el lexer y parser de Python...");
+      try {
+        const response = await fetch("/api/analyze", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ source: sourceEditor.value })
+        });
+        const result = await response.json();
+        if (!response.ok) {
+          throw new Error(result.error || `El servidor respondió ${response.status}.`);
+        }
+
+        renderDemoTokens(result.tokens);
+        renderDemoErrors(lexicalErrors, result.lexicalErrors);
+        renderDemoErrors(syntaxErrors, result.syntaxErrors);
+        tokenSummary.textContent =
+          `${result.tokens.length} token(es) reconocido(s); ` +
+          `${result.lexicalErrors.length} error(es) léxico(s).`;
+        parserSummary.textContent = result.syntaxErrors.length === 0
+          ? "Sin errores sintácticos."
+          : `${result.syntaxErrors.length} error(es) sintáctico(s).`;
+        renderParsedTree(result.tree, result.treeText, result.valid);
+        setDemoStatus(
+          result.valid
+            ? "Programa válido: el lexer reconoció los tokens y el parser construyó el árbol."
+            : "El programa contiene errores. Revisa el resultado de cada fase."
+        );
+      } catch (error) {
+        setDemoStatus(
+          `No se pudo analizar: ${error.message} Ejecuta python main.py para iniciar la demo local.`,
+          true
+        );
+      } finally {
+        analyzeSourceButton.disabled = false;
+      }
+    }
+
+    loadSourceButton.addEventListener("click", loadSourceExample);
+    analyzeSourceButton.addEventListener("click", analyzeSource);
+    sourceEditor.addEventListener("keydown", (event) => {
+      if (event.ctrlKey && event.key === "Enter") analyzeSource();
+    });
+    loadSourceExample();
 
     const afdStates = [
       ...Array.from({ length: 26 }, (_, index) => `q${index}`),
@@ -1841,17 +2306,23 @@ si (humedad ! 30) { ... }</code></pre></div>
     const programFields = [
       {
         key: "humidity",
-        label: "Humedad actual",
+        label: "Humedad actual del suelo",
         rule: "<declaracion> ::= VAR ID ASIG <expr> PYC",
         input: "#value-humidity",
-        error: "#error-humidity"
+        error: "#error-humidity",
+        minimum: 0,
+        maximum: 100,
+        rangeMessage: "La humedad del suelo debe estar entre 0 y 100 % en la escala calibrada del sensor. Un valor fuera de ese rango no representa un porcentaje válido."
       },
       {
         key: "target",
-        label: "Meta de humedad",
+        label: "Meta de humedad del suelo",
         rule: "<declaracion> ::= VAR ID ASIG <expr> PYC",
         input: "#value-target",
-        error: "#error-target"
+        error: "#error-target",
+        minimum: 0,
+        maximum: 100,
+        rangeMessage: "La meta debe estar entre 0 y 100 % en la escala calibrada del sensor. No hay un porcentaje óptimo universal: ajústala al suelo, al cultivo y al sensor."
       },
       {
         key: "temperature",
@@ -1872,7 +2343,10 @@ si (humedad ! 30) { ... }</code></pre></div>
         label: "Temperatura límite",
         rule: "<condicion> ::= <expr> <oprel> <expr>",
         input: "#value-temperature-limit",
-        error: "#error-temperature-limit"
+        error: "#error-temperature-limit",
+        minimum: 18,
+        maximum: 21,
+        rangeMessage: "El umbral didáctico debe estar entre 18 y 21 °C, rango óptimo de referencia reportado para café arábigo. Ajusta el valor a las condiciones locales antes de usarlo como control real."
       }
     ].map((field) => ({
       ...field,
@@ -1897,7 +2371,27 @@ si (humedad ! 30) { ... }</code></pre></div>
       if (!numberPattern.test(value)) {
         return `La regla ${field.rule} requiere una expresión con NUM. Ingresa solo dígitos y, opcionalmente, un decimal con punto; no una fórmula o instrucción.`;
       }
+      const numericValue = Number(value);
+      if (
+        (field.minimum !== undefined && numericValue < field.minimum) ||
+        (field.maximum !== undefined && numericValue > field.maximum)
+      ) {
+        return field.rangeMessage;
+      }
       return "";
+    }
+
+    const temperatureField = programFields.find((field) => field.key === "temperature");
+    const temperatureHint = document.querySelector("#temperature-hint");
+    const temperatureReference = "El rango óptimo de referencia para café arábigo es 18–21 °C.";
+    function updateTemperatureHint() {
+      const value = temperatureField.input.value.trim();
+      const temperature = numberPattern.test(value) ? Number(value) : null;
+      const outsideReference = temperature !== null && (temperature < 18 || temperature > 21);
+      temperatureHint.classList.toggle("warning", outsideReference);
+      temperatureHint.textContent = outsideReference
+        ? `Aviso: ${temperature} °C está fuera del rango de referencia. ${temperatureReference} La lectura se admite porque es una medición; revisa las condiciones locales.`
+        : `${temperatureReference} Una lectura actual fuera de ese rango se admite y se señala, no se bloquea.`;
     }
 
     function buildProgram(values) {
@@ -1947,6 +2441,8 @@ si (humedad ! 30) { ... }</code></pre></div>
         return;
       }
 
+      stopTreePlayback();
+      treeStep = 0;
       Object.entries(configurableNumbers).forEach(([key, index]) => {
         numericNodes[index].label = `NUM '${values[key]}'`;
       });
@@ -1955,18 +2451,25 @@ si (humedad ! 30) { ... }</code></pre></div>
       document.querySelector("#derivation-tree").textContent =
         `ÁRBOL DE DERIVACIÓN SINTÁCTICA\n${treeRoot.label}\n${renderTreeText(treeRoot).join("\n")}`;
       updateTreeView();
-      formStatus.textContent =
-        "Valores válidos: cada campo cumple el formato NUM de AgroScript. El programa y su árbol se actualizaron.";
+      const currentTemperature = Number(values.temperature);
+      const temperatureOutsideReference = currentTemperature < 18 || currentTemperature > 21;
+      formStatus.textContent = temperatureOutsideReference
+        ? `Programa y árbol actualizados. Aviso: la temperatura actual (${currentTemperature} °C) está fuera del rango óptimo de referencia de 18–21 °C para café arábigo; se aceptó como medición.`
+        : "Valores válidos: cada campo cumple el formato NUM de AgroScript. El programa y su árbol se actualizaron.";
     });
 
     programFields.forEach((field) => {
       field.input.addEventListener("input", () => {
         field.input.setAttribute("aria-invalid", "false");
         field.error.textContent = "";
+        if (field.key === "temperature") {
+          updateTemperatureHint();
+        }
         formStatus.classList.remove("error");
         formStatus.textContent = "";
       });
     });
+    updateTemperatureHint();
 
     treeUi.first.addEventListener("click", () => {
       treeStep = 0;
