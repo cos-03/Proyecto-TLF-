@@ -10,11 +10,21 @@ from .lexer import analyze
 from .model import LexicalError, SyntaxErrorInfo
 from .parser import parse
 from .tree import render_tree
+from .web import run_server
+
+
+def _launch_web_demo() -> int:
+    run_server()
+    return 0
 
 
 def _arguments(argv: list[str] | None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Analizador léxico y sintáctico de AgroScript.")
-    parser.add_argument("source", type=Path, help="Ruta del archivo .agro")
+    parser.add_argument("source", nargs="?", type=Path, help="Ruta del archivo .agro")
+    parser.add_argument(
+        "--web", action="store_true",
+        help="Abre la demostración web interactiva con el lexer y parser de Python.",
+    )
     parser.add_argument(
         "--tokens", action="store_true",
         help="Muestra los tokens reconocidos y sus recorridos por el AFD.",
@@ -59,7 +69,15 @@ def main(argv: list[str] | None = None) -> int:
     if sys.platform == "win32":
         sys.stdout.reconfigure(encoding="utf-8")
         sys.stderr.reconfigure(encoding="utf-8")
+
+    if argv is None:
+        argv = sys.argv[1:]
+    if not argv:
+        return _launch_web_demo()
+
     args = _arguments(argv)
+    if args.web or args.source is None:
+        return _launch_web_demo()
     try:
         source = args.source.read_text(encoding="utf-8")
     except OSError as error:

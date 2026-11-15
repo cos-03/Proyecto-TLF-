@@ -1,5 +1,7 @@
 import unittest
+from unittest.mock import patch
 
+from agroscript.cli import main
 from agroscript.lexer import analyze
 from agroscript.parser import parse
 from agroscript.tree import render_tree
@@ -35,6 +37,13 @@ class ParserTests(unittest.TestCase):
         tree, errors = parse(analyze("programa demo { mostrar(1);").tokens)
         self.assertIsNone(tree)
         self.assertEqual(len(errors), 1)
+
+    @patch("agroscript.cli.webbrowser.open", return_value=True)
+    def test_opens_html_when_no_source_is_given(self, mock_open):
+        result = main([])
+        self.assertEqual(result, 0)
+        mock_open.assert_called_once()
+        self.assertIn("index.html", mock_open.call_args[0][0])
 
 
 if __name__ == "__main__":

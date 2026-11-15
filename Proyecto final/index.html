@@ -165,16 +165,23 @@
 
     .stats {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
-      margin: 20px 0 68px;
-    }
-
-    .stat {
-      padding: 19px 21px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0;
+      margin: 20px auto 68px;
+      overflow: hidden;
       border: 1px solid var(--line);
       border-radius: 18px;
       background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .stat {
+      min-width: 0;
+      padding: 19px 21px;
+    }
+
+    .stat + .stat {
+      border-left: 1px solid var(--line);
     }
 
     .stat strong {
@@ -229,6 +236,7 @@
     }
 
     .card {
+      min-width: 0;
       padding: 26px;
       border: 1px solid var(--line);
       border-radius: 22px;
@@ -283,6 +291,7 @@
 
     .step {
       position: relative;
+      min-width: 0;
       min-height: 145px;
       padding: 21px;
       border: 1px solid var(--line);
@@ -356,6 +365,128 @@
     .state.accept { border-color: #b6d775; background: #eff8d7; }
     .state.sink { border-color: #f0c2a3; background: #fff0e7; color: #9c4e27; }
     .arrow { color: #90a197; }
+
+    .afd-explorer { margin-top: 18px; }
+    .afd-explorer-heading {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 14px;
+    }
+    .afd-explorer-heading h3 { margin: 0; }
+    .afd-explorer-heading p { color: var(--muted); font-size: 13px; }
+    .afd-state-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 14px;
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .afd-state-picker {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(52px, 1fr));
+      gap: 8px;
+      margin: 14px 0;
+    }
+    .afd-state-button {
+      min-height: 38px;
+      border: 1px solid #d5dfd1;
+      border-radius: 9px;
+      background: #f5f8ee;
+      color: var(--green);
+      cursor: pointer;
+      font: 700 12px Consolas, monospace;
+    }
+    .afd-state-button.accepting { border-color: #b6d775; background: #eff8d7; }
+    .afd-state-button.rejected { border-color: #d5dfd1; background: #f5f8ee; }
+    .afd-state-button.sink { border-color: #f0c2a3; background: #fff0e7; color: #9c4e27; }
+    .afd-state-button[aria-pressed="true"] {
+      border-color: var(--green);
+      background: var(--green);
+      color: white;
+      box-shadow: 0 0 0 2px rgba(36, 92, 69, .16);
+    }
+    .afd-state-detail {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: #f8faf6;
+    }
+    .afd-state-summary {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .afd-state-summary .state { flex: 0 0 auto; }
+    .afd-state-copy { flex: 1 1 220px; min-width: 0; }
+    .afd-state-copy h4 { margin: 0 0 3px; }
+    .afd-state-copy p { margin: 0; color: var(--muted); font-size: 13px; }
+    .afd-state-status {
+      padding: 5px 9px;
+      border: 1px solid #b6d775;
+      border-radius: 999px;
+      background: #eff8d7;
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 750;
+    }
+    .afd-state-status.rejected { border-color: #d5dfd1; background: #f5f8ee; }
+    .afd-state-status.sink { border-color: #f0c2a3; background: #fff0e7; color: #9c4e27; }
+    .afd-transition-heading { margin: 0 0 10px; font-size: 14px; }
+    .afd-transition-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 8px;
+    }
+    .afd-transition {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 9px;
+      min-width: 0;
+      padding: 9px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--surface);
+    }
+    .afd-transition-source {
+      flex: 0 0 auto;
+      color: var(--green);
+      font: 700 12px Consolas, monospace;
+    }
+    .afd-transition-input {
+      min-width: 0;
+      color: var(--muted);
+      font-size: 12px;
+      overflow-wrap: anywhere;
+      text-align: center;
+    }
+    .afd-destination {
+      flex: 0 0 auto;
+      min-width: 48px;
+      min-height: 34px;
+      padding: 0 8px;
+      border: 1px solid #b6d775;
+      border-radius: 8px;
+      background: #eff8d7;
+      color: var(--green);
+      cursor: pointer;
+      font: 700 12px Consolas, monospace;
+    }
+    .afd-destination.sink { border-color: #f0c2a3; background: #fff0e7; color: #9c4e27; }
+    .afd-fallback {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 13px 0 0 !important;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .afd-fallback[hidden] { display: none; }
 
     .table-wrap { overflow-x: auto; }
 
@@ -633,7 +764,9 @@
 
     @media (max-width: 800px) {
       .hero-note { display: none; }
-      .stats { grid-template-columns: repeat(2, 1fr); margin-bottom: 48px; }
+      .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-bottom: 48px; }
+      .stat:nth-child(n + 3) { border-top: 1px solid var(--line); }
+      .stat:nth-child(3) { border-left: 0; }
       .overview, .afd-layout, .grammar-grid, .builder-grid, .tree-layout, .run-card { grid-template-columns: 1fr; }
       .value-fields { grid-template-columns: 1fr; }
       .pipeline { grid-template-columns: repeat(2, 1fr); margin-bottom: 48px; }
@@ -645,7 +778,8 @@
       .topbar { align-items: flex-start; flex-direction: column; }
       .topnav { gap: 13px; }
       .hero { padding: 36px 25px; border-radius: 22px; }
-      .stats { gap: 8px; }
+      .afd-explorer-heading { align-items: flex-start; flex-direction: column; }
+      .afd-state-detail { padding: 12px; }
       .stat { padding: 14px; }
       .pipeline { gap: 8px; }
       .step { padding: 15px; }
@@ -793,6 +927,34 @@
           </div>
         </article>
       </div>
+      <article class="card afd-explorer" aria-labelledby="afd-explorer-title">
+        <div class="afd-explorer-heading">
+          <h3 id="afd-explorer-title">Recorre el AFD, estado por estado</h3>
+          <p>Selecciona un estado y sigue los botones de destino para recorrer sus transiciones.</p>
+        </div>
+        <div class="afd-state-legend" aria-label="Leyenda de estados">
+          <span><i class="tree-dot terminal"></i>Estado de aceptación</span>
+          <span><i class="tree-dot nonterminal"></i>Estado de rechazo</span>
+          <span><i class="tree-dot highlight"></i>Sumidero qE</span>
+        </div>
+        <div class="afd-state-picker" id="afd-state-picker" role="group" aria-label="Seleccionar estado del AFD"></div>
+        <div class="afd-state-detail" aria-live="polite">
+          <div class="afd-state-summary">
+            <span class="state" id="afd-current-node">q0</span>
+            <div class="afd-state-copy">
+              <h4 id="afd-current-title"></h4>
+              <p id="afd-current-description"></p>
+            </div>
+            <span class="afd-state-status" id="afd-current-status"></span>
+          </div>
+          <h4 class="afd-transition-heading">Transiciones desde <code id="afd-current-source">q0</code></h4>
+          <div class="afd-transition-list" id="afd-transition-list"></div>
+          <p class="afd-fallback" id="afd-fallback">
+            <span>Cualquier otra entrada de Σ conduce al sumidero:</span>
+            <button class="afd-destination sink" id="afd-fallback-destination" type="button">qE</button>
+          </p>
+        </div>
+      </article>
     </section>
 
     <section class="wrap grammar-section" id="gramatica">
@@ -1257,6 +1419,159 @@ si (humedad ! 30) { ... }</code></pre></div>
         });
       });
     });
+
+    const afdStates = [
+      ...Array.from({ length: 26 }, (_, index) => `q${index}`),
+      "qE"
+    ];
+    const afdAccepting = new Set(
+      afdStates.filter((state) => !["q0", "q3", "q5", "q13", "qE"].includes(state))
+    );
+    const afdStateDetails = {
+      q0: ["Inicio", "Estado inicial; no acepta ningún token por sí solo."],
+      q1: ["Identificador / reservada", "Lee letras ASCII, dígitos y guion bajo. Al terminar, clasifica las palabras reservadas."],
+      q2: ["Número entero", "Acepta NUM entero; un punto decimal lleva al estado incompleto q3."],
+      q3: ["Decimal incompleto", "No acepta todavía: necesita uno o más dígitos después del punto."],
+      q4: ["Número decimal", "Acepta NUM decimal y permanece aquí mientras lee más dígitos."],
+      q5: ["Cadena abierta", "No acepta todavía: lee contenido de Σ hasta encontrar la comilla de cierre; LF la rechaza."],
+      q6: ["Cadena cerrada", "Acepta una CADENA después de leer su comilla final."],
+      q7: ["Operador +", "Acepta el token MAS."],
+      q8: ["Operador -", "Acepta el token MENOS."],
+      q9: ["Operador *", "Acepta el token POR."],
+      q10: ["Operador /", "Acepta el token DIV."],
+      q11: ["Operador =", "Acepta ASIG; otro = extiende el recorrido hasta IGUAL."],
+      q12: ["Operador ==", "Acepta el token IGUAL."],
+      q13: ["Operador ! incompleto", "No acepta: solo el siguiente = forma el operador DIF."],
+      q14: ["Operador !=", "Acepta el token DIF."],
+      q15: ["Operador <", "Acepta MENOR; otro = extiende el recorrido hasta MENORIG."],
+      q16: ["Operador <=", "Acepta el token MENORIG."],
+      q17: ["Operador >", "Acepta MAYOR; otro = extiende el recorrido hasta MAYORIG."],
+      q18: ["Operador >=", "Acepta el token MAYORIG."],
+      q19: ["Delimitador (", "Acepta el token PAR_A."],
+      q20: ["Delimitador )", "Acepta el token PAR_C."],
+      q21: ["Delimitador {", "Acepta el token LLAVE_A."],
+      q22: ["Delimitador }", "Acepta el token LLAVE_C."],
+      q23: ["Delimitador ;", "Acepta el token PYC."],
+      q24: ["Comentario", "Acepta y descarta el comentario; se repite hasta encontrar LF."],
+      q25: ["Espacio en blanco", "Acepta y descarta espacio, tabulador, CR y LF."],
+      qE: ["Sumidero", "Estado de rechazo absorbente: cualquier símbolo de Σ mantiene el recorrido en qE."]
+    };
+    const afdTransitions = {
+      q0: [
+        ["Letra ASCII", "q1"], ["Dígito", "q2"], ['"', "q5"],
+        ["+", "q7"], ["-", "q8"], ["*", "q9"], ["/", "q10"],
+        ["=", "q11"], ["!", "q13"], ["<", "q15"], [">", "q17"],
+        ["(", "q19"], [")", "q20"], ["{", "q21"], ["}", "q22"],
+        [";", "q23"], ["#", "q24"], ["Espacio / tab / CR", "q25"],
+        ["LF", "q25"]
+      ],
+      q1: [["Letra / dígito / _", "q1"]],
+      q2: [["Dígito", "q2"], [".", "q3"]],
+      q3: [["Dígito", "q4"]],
+      q4: [["Dígito", "q4"]],
+      q5: [['Cualquier símbolo de Σ excepto " y LF', "q5"], ['"', "q6"]],
+      q11: [["=", "q12"]],
+      q13: [["=", "q14"]],
+      q15: [["=", "q16"]],
+      q17: [["=", "q18"]],
+      q24: [["Cualquier símbolo de Σ excepto LF", "q24"]],
+      q25: [["Espacio / tab / CR / LF", "q25"]],
+      qE: [["Cualquier símbolo de Σ", "qE"]]
+    };
+    const afdTokenNames = {
+      q1: "ID o palabra reservada", q2: "NUM entero", q4: "NUM decimal",
+      q6: "CADENA", q7: "MAS", q8: "MENOS", q9: "POR", q10: "DIV",
+      q11: "ASIG", q12: "IGUAL", q14: "DIF", q15: "MENOR",
+      q16: "MENORIG", q17: "MAYOR", q18: "MAYORIG",
+      q19: "PAR_A", q20: "PAR_C", q21: "LLAVE_A", q22: "LLAVE_C",
+      q23: "PYC", q24: "COMENTARIO (descartado)",
+      q25: "ESPACIO (descartado)"
+    };
+    const afdPicker = document.querySelector("#afd-state-picker");
+    const afdCurrentNode = document.querySelector("#afd-current-node");
+    const afdCurrentTitle = document.querySelector("#afd-current-title");
+    const afdCurrentDescription = document.querySelector("#afd-current-description");
+    const afdCurrentStatus = document.querySelector("#afd-current-status");
+    const afdCurrentSource = document.querySelector("#afd-current-source");
+    const afdTransitionList = document.querySelector("#afd-transition-list");
+    const afdFallback = document.querySelector("#afd-fallback");
+
+    function renderAfdState(state) {
+      const accepting = afdAccepting.has(state);
+      const sink = state === "qE";
+      const [title, description] = afdStateDetails[state];
+      afdCurrentNode.textContent = state;
+      afdCurrentNode.className = `state${accepting ? " accept" : ""}${sink ? " sink" : ""}`;
+      afdCurrentTitle.textContent = title;
+      afdCurrentDescription.textContent = description;
+      afdCurrentStatus.textContent = sink
+        ? "Sumidero · Rechazo"
+        : state === "q0"
+          ? "Inicial · Rechazo"
+          : accepting
+            ? `Acepta · ${afdTokenNames[state]}`
+            : "Rechazo";
+      afdCurrentStatus.className =
+        `afd-state-status${accepting ? "" : " rejected"}${sink ? " sink" : ""}`;
+      afdCurrentSource.textContent = state;
+      afdFallback.hidden = sink;
+
+      afdPicker.querySelectorAll(".afd-state-button").forEach((button) => {
+        button.setAttribute("aria-pressed", String(button.dataset.state === state));
+      });
+
+      afdTransitionList.replaceChildren();
+      (afdTransitions[state] || []).forEach(([input, destinationState]) => {
+        const transition = document.createElement("div");
+        transition.className = "afd-transition";
+
+        const source = document.createElement("span");
+        source.className = "afd-transition-source";
+        source.textContent = state;
+
+        const label = document.createElement("span");
+        label.className = "afd-transition-input";
+        label.textContent = input;
+
+        const arrow = document.createElement("span");
+        arrow.className = "arrow";
+        arrow.setAttribute("aria-hidden", "true");
+        arrow.textContent = "→";
+
+        const destination = document.createElement("button");
+        destination.type = "button";
+        destination.className = `afd-destination${destinationState === "qE" ? " sink" : ""}`;
+        destination.textContent = destinationState;
+        destination.setAttribute("aria-label", `Seguir transición a ${destinationState}`);
+        destination.addEventListener("click", () => renderAfdState(destinationState));
+
+        transition.append(source, label, arrow, destination);
+        afdTransitionList.append(transition);
+      });
+    }
+
+    afdStates.forEach((state) => {
+      const button = document.createElement("button");
+      const accepting = afdAccepting.has(state);
+      const sink = state === "qE";
+      button.type = "button";
+      button.className =
+        `afd-state-button ${sink ? "sink" : accepting ? "accepting" : "rejected"}`;
+      button.textContent = state;
+      button.dataset.state = state;
+      button.setAttribute(
+        "aria-label",
+        `Seleccionar ${state}: ${sink ? "sumidero" : accepting ? "aceptación" : "rechazo"}`
+      );
+      button.setAttribute("aria-pressed", "false");
+      button.addEventListener("click", () => renderAfdState(state));
+      afdPicker.append(button);
+    });
+    document.querySelector("#afd-fallback-destination").addEventListener(
+      "click",
+      () => renderAfdState("qE")
+    );
+    renderAfdState("q0");
 
     const treeLines = document.querySelector("#derivation-tree").textContent.trimEnd().split(/\r?\n/);
     const treeRoot = { id: 0, label: treeLines[1], children: [] };

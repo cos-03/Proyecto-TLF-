@@ -19,18 +19,23 @@ analiza la sintaxis.
 Desde esta carpeta:
 
 ```text
+python main.py
 python main.py ejemplos/riego_valido.agro
 python main.py ejemplos/riego_valido.agro --tokens
 python -m unittest discover -s tests -v
 ```
 
+Sin argumentos, `python main.py` abre `index.html` en el navegador por defecto.
+Con una ruta de archivo se analiza el programa `.agro` normalmente.
+
 Para recorrer la presentación visual, abre `index.html` en un navegador. La
-página incluye un configurador que recibe valores NUM y construye el programa
-sin que el usuario escriba código. Si un dato no cumple el formato de la
-gramática, muestra el motivo. El árbol de derivación se actualiza con esos
-valores y permite avanzar por las expansiones, reproducirlas y consultar la
-forma sentencial. Para analizar otro archivo o regenerar el árbol, usa Python
-mediante los comandos anteriores.
+página permite explorar las transiciones de cada estado del AFD y distingue
+estados de aceptación, rechazo y el sumidero. También incluye un configurador
+que recibe valores NUM y construye el programa sin que el usuario escriba
+código. Si un dato no cumple el formato de la gramática, muestra el motivo. El
+árbol de derivación se actualiza con esos valores y permite avanzar por las
+expansiones, reproducirlas y consultar la forma sentencial. Para analizar otro
+archivo o regenerar el árbol, usa Python mediante los comandos anteriores.
 
 El código de salida es `0` si el programa es válido, `1` si hay errores
 léxicos o sintácticos y `2` si no se pudo leer el archivo.
