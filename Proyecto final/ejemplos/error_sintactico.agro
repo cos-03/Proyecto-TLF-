@@ -1,0 +1,10 @@
+programa prueba_sintaxis {
+    var humedad = 50
+    var meta = (60 +;
+    si humedad < meta) {
+        regar(meta - humedad);
+    }
+    mientras (humedad) {
+        humedad = humedad + 1;
+    }
+    mostrar(humedad);

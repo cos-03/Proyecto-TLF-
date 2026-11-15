@@ -1,0 +1,7 @@
+programa prueba_lexica {
+    var humedad = 45 @ 2;
+    var umbral = 12.;
+    si (humedad ! 30) {
+        alerta("sensor sin respuesta);
+    }
+}
